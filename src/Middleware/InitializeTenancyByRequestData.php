@@ -55,6 +55,8 @@ class InitializeTenancyByRequestData extends IdentificationMiddleware
             $tenant = $request->header(static::$header);
         } elseif (static::$queryParameter && $request->has(static::$queryParameter)) {
             $tenant = $request->get(static::$queryParameter);
+        } elseif (static::$header && $request->hasCookie(static::$header)) {
+            $tenant = $request->cookie(static::$header);
         }
 
         return $tenant;
